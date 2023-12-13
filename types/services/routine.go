@@ -594,14 +594,14 @@ func CheckHttp(s *Service, record bool) (*Service, error) {
 		}
 		if !match {
 			if record {
-				RecordFailure(s, fmt.Sprintf("HTTP Response Body did not match '%v'", s.Expected), "regex")
++                              RecordFailure(s, fmt.Sprintf("HTTP Response Body did not match.<br/>Expected: '%v'<br/>Actual: '%v'", s.Expected, s.LastResponse), "regex")
 			}
 			return s, err
 		}
 	}
 	if s.ExpectedStatus != res.StatusCode {
 		if record {
-			RecordFailure(s, fmt.Sprintf("HTTP Status Code %v did not match %v", res.StatusCode, s.ExpectedStatus), "status_code")
++                      RecordFailure(s, fmt.Sprintf("HTTP Status Code %v did not match %v.<br/>ResponseBody: '%v'", res.StatusCode, s.ExpectedStatus, s.LastResponse), "status_code")
 		}
 		return s, err
 	}
